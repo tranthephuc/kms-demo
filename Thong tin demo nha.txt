@@ -1,0 +1,38 @@
+
+python ethereum-kms-signer/examples/erc20_transfer.py --web3-provider=https://rinkeby.infura.io/v3/4384089cd4d74263ade9a6320158d798 --token-address=\'0xc7AD46e0b8a400Bb3C915120d284AafbA8fc4735\' --to-address=\'0xD612CE423F61a3FFc62EC39555069EfC44E1A1F3\' --amount=10000000 --key-id ed2345d5-f283-4e4a-840b-ecd7bae5a231
+
+///
+1. How to get Wallet public Address
+# ethereum_kms_signer address --key-id ed2345d5-f283-4e4a-840b-ecd7bae5a231
+0x0144Be45f99Bc578Ea4f1bDB0A257da49a442963
+2. How to transfer ERC-20
+
+# python ethereum-kms-signer/examples/erc20_transfer.py --web3-provider='https://rinkeby.infura.io/v3/4384089cd4d74263ade9a6320158d798' --token-address='0x8ad3aA5d5ff084307d28C8f514D7a193B2Bfe725' --to-address='0xD612CE423F61a3FFc62EC39555069EfC44E1A1F3' --amount=10000000 --key-id ed2345d5-f283-4e4a-840b-ecd7bae5a231
+
+
+
+dai_txn = dai.functions.transfer(
+        web3.toChecksumAddress(to_address.lower()), amount
+    ).buildTransaction(
+        {
+            "nonce": nonce,
+           # 'gas': 3,
+           # 'gasPrice': web3.eth.gasPrice,
+        }
+    )
+
+    signed_tx = sign_transaction(dai_txn, key_id)
+
+    # send transaction
+    tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+
+    # get transaction hash
+    print("Transaction Hash:", web3.toHex(tx_hash))
+
+
+0xcAD46E0b8a400Bb3C915120d284AafbA8fc4735
+
+Dai whhich I have
+0x8ad3aA5d5ff084307d28C8f514D7a193B2Bfe725
+
+https://rinkeby.infura.io/v3/de06a234c8f144139173218c8a3c1e25
